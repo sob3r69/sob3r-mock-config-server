@@ -1,6 +1,7 @@
 {
   "name": "mock-config-server",
-  "version": "4.0.3",
+  "version": "4.0.4",
+  "packageManager": "yarn@4.9.4",
   "description": "Tool that easily and quickly imitates server operation, create full fake api in few steps",
   "author": {
     "name": "SIBERIA CAN CODE 🧊",
@@ -49,8 +50,8 @@
   "main": "dist/index.js",
   "types": "./dist/index.d.ts",
   "bin": {
-    "mock-config-server": "dist/bin/bin.js",
-    "mcs": "dist/bin/bin.js"
+    "mcs": "dist/bin/bin.js",
+    "mock-config-server": "dist/bin/bin.js"
   },
   "files": [
     "dist"

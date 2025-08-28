@@ -161,6 +161,7 @@ Temporary Items
 =======
 # Local
 .env
+.yarn
 dist
 mock-server.config.*
 !bin/templates/**/mock-server.config.*

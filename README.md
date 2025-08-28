@@ -2,6 +2,32 @@
 
 tool that easily and quickly imitates server operation, create full fake api in few steps
 
+## Forked changes
+
+1. In database request if in response you get only 1 element, then you get this element without an array.
+
+How it was:
+
+```json
+// /api/users?id=1
+[
+  {
+    "id": 1,
+    "name": "John"
+  }
+]
+```
+
+How it now:
+
+```json
+// /api/users?id=1
+{
+  "id": 1,
+  "name": "John"
+}
+```
+
 ## Install
 
 Install with [npm](https://www.npmjs.com/) or [yarn](https://yarnpkg.com/)
@@ -367,7 +393,7 @@ const flatMockServerConfig = [
                 postId: {
                   checkMode: 'function',
                   value: (actualValue) => +actualValue >= 0 && +actualValue <= 50
-                },
+                }
               },
               cookies: {
                 authToken: {

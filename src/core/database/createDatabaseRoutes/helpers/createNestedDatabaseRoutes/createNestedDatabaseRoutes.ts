@@ -76,11 +76,19 @@ export const createNestedDatabaseRoutes = (
         }
       }
 
+      const resp = () => {
+        if (data.length === 1) {
+          return data[0];
+        } else {
+          return data;
+        }
+      };
+
       // ✅ important:
       // set 'Cache-Control' header for explicit browsers response revalidate
       // https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Cache-Control
       response.set('Cache-control', 'no-cache');
-      response.json(data);
+      response.json(resp());
     });
 
     router.route(collectionPath).post((request, response) => {
@@ -127,7 +135,11 @@ export const createNestedDatabaseRoutes = (
       }
 
       const currentResource = storage.read([key, currentResourceIndex]);
-      const updatedResource = { ...currentResource, ...request.body, id: currentResource.id };
+      const updatedResource = {
+        ...currentResource,
+        ...request.body,
+        id: currentResource.id
+      };
       storage.write([key, currentResourceIndex], updatedResource);
       response.json(updatedResource);
     });
