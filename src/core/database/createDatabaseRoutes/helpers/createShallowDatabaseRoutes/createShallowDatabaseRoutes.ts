@@ -5,6 +5,7 @@ import type { ShallowDatabase } from '@/utils/types';
 
 import type { MemoryStorage } from '../../storages';
 
+import { returnOneOrArray } from '../array';
 import { filter } from '../filter/filter';
 import { pagination } from '../pagination/pagination';
 import { search } from '../search/search';
@@ -80,7 +81,7 @@ export const createShallowDatabaseRoutes = (
       // set 'Cache-Control' header for explicit browsers response revalidate
       // https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Cache-Control
       response.set('Cache-control', 'no-cache');
-      response.json(data);
+      response.json(returnOneOrArray(data));
     });
 
     router.route(path).post((request, response) => {

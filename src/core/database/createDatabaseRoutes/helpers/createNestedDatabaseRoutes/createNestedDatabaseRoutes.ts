@@ -5,7 +5,7 @@ import type { NestedDatabase } from '@/utils/types';
 
 import type { MemoryStorage } from '../../storages';
 
-import { createNewId, findIndexById } from '../array';
+import { createNewId, findIndexById, returnOneOrArray } from '../array';
 import { filter } from '../filter/filter';
 import { pagination } from '../pagination/pagination';
 import { search } from '../search/search';
@@ -76,19 +76,11 @@ export const createNestedDatabaseRoutes = (
         }
       }
 
-      const resp = () => {
-        if (data.length === 1) {
-          return data[0];
-        } else {
-          return data;
-        }
-      };
-
       // ✅ important:
       // set 'Cache-Control' header for explicit browsers response revalidate
       // https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Cache-Control
       response.set('Cache-control', 'no-cache');
-      response.json(resp());
+      response.json(returnOneOrArray(data));
     });
 
     router.route(collectionPath).post((request, response) => {
